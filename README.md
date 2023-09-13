@@ -3,12 +3,8 @@
 </p>
 
 <h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
-This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines.<br />
+This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines.
 
-
-<h2>Video Demonstration</h2>
-
-- ### [YouTube: How to Deploy on-premises Active Directory within Azure Compute](https://www.youtube.com)
 
 <h2>Environments and Technologies Used</h2>
 
@@ -24,33 +20,32 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 <h2>High-Level Deployment and Configuration Steps</h2>
 
-- Step 1
-- Step 2
-- Step 3
-- Step 4
+- Setup Resources in Azure
+- Ensure connectivity between client and domain controller
+- Install Active Directory
+- Create an Admin and Normal User account in Active Directory
+- Join Client VM to Domain VM
+- Setup Remote Desktop for Non-Administrative users in Client VM
+- Create Users additional users to log into Client VM
 
 <h2>Deployment and Configuration Steps</h2>
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+   1. Create a Resource Group and Domain Controller Virtual Machine.<br>
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+A. Under Project Details, next to resource group, click *Create New* and enter a name for the resource group, then click OK. In this example, the name for the Resource Group will be **AD**.<br>
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/b42980c6-3214-4b18-aaf5-a83ff06d5a44)
+
+B. Under Instance Details, next to Virtual Machine Name, enter the name for your Domain Controller VM. In this example, the name for the Domain Controller VM will be **DC-1**.
+- For the *Region* select one that will be used for both the Domain Controller VM and Client VM.
+- For the *Image* select **Windows Server 2022 Datacenter**
+- For the *Size* choose an option that has at least 2 vcpu's. 
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/79fad714-36e6-4e9e-adb9-b6b8eea598eb)
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/b2e4001f-782d-4b73-a834-6559f0cfc45a)
+
+
+C. Under **Administrator Account** create a Username and Password.
+D. Leave the rest of the settings as default, and click **Review + Create** at the bottom of the page. 
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/d7b68015-1070-4a56-a119-ac848ba848ca)
