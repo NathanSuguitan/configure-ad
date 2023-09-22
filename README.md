@@ -159,11 +159,11 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 ![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/acf50af8-32a4-4701-b525-1204ee6544d3)
 
-<h3>Access Domain Controller VM using RDC and Enable Connectivity from Client VM</h3>
+<h3>Access Domain Controller VM using RDC and Enable ICMPv4 Connectivity from Client VM</h3>
 
 1. Follow the steps to connect to the **Client VM** using the **public IP address** of the **Domain Controller**.
 
-2. click start and search **mf.msc**.
+2. click start and search **wf.msc**.
 
 ![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/5e4ae9c8-df83-4be6-8a49-60a0b7cef6f0)
 
@@ -178,4 +178,75 @@ This tutorial outlines the implementation of on-premises Active Directory within
 6. Right-Click and select **Enable Rule** for both options named **Core Networking Diagnostics - ICMP Echo Request (ICMPv4-In)**
 
 ![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/425e7af4-46c1-403b-bc6c-c44fb29b687d)
+
+<h2>Install Active Directory.</h2>
+
+1. In the Domain Controller VM, click start, and select **SErver Manager**
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/453f0d17-d2b3-4542-92d5-c194107a1121)
+
+2. On the Dashboard, in the Quick Start tab, select **Add roles and features**
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/1103f860-bee9-47fb-beed-00a791feffa7)
+
+3. On the **before you begin** page, click next.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/e0f8676c-51dc-4efe-860c-433f3b7da278)
+
+4. On the **Installation Type** page, select *Role-based or feature-based installation* and click next.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/3e3a4519-deca-44a6-b28a-2d90e319e1d6)
+
+5. On the **Server Select** page, select **Select a server from the server pool**. Select the **Domain Controller** in the list, then click next.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/aa66f3d4-0345-4175-9399-deb3df259915)
+
+
+6. On the **Server Roles** page, select **Active Directory Domain Services** and click **Add Features** in the pop-up.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/6a5082d5-7551-4d83-9c54-1fcb1548878a)
+
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/1c39cf5a-d1ee-41e4-99fc-4f3ac361f3ff)
+
+7. On the **Features** and **AD DS** pages, keep everything as default and click next.
+
+8. On the **Confirmation** page, click **install**. After install, close the window.
+
+9. On the **dashboard** homepage there will be a notification at the top right. Click on the notification.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/430d3707-c05a-43bb-923d-728d7a899bcf)
+
+10. In the pop-up, click **Promote this server to a domain controller**
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/8d3fe398-3497-404c-98ab-e51544e27c0a)
+
+11. In the **Deployment Configuration** page, click **Add a new forest** and name the domain with a ".com" address. Then click next. 
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/f11d8c3b-f824-44b2-921c-1fde8f85db83)
+
+12. On the **domain controllers** page, create a password, then click next.
+
+13. On the **DNS options**, **Paths**, **Review Options**, page, keep the settings default, and click next.
+
+14. On the **Prerequisites Check** page, click **Install**. This will automatically restart the domain controller.
+
+15. Login to the domain controller as user. The username will be the domain name that was setup earlier, followed by a backslash and the username.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/2f20c08c-ee70-42d6-a3c6-9c99499e6f1f)
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
