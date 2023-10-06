@@ -27,7 +27,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 - Create an Admin and Normal User account in Active Directory.
 - Join Client VM to Domain VM.
 - Setup Remote Desktop for Non-Administrative users in Client VM.
-- Create Users additional users to log into Client VM.
+- Create additional users to log into Client VM.
 
 <h2>Setup Resources and VMs in Azure</h2>
 
@@ -227,20 +227,103 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 12. On the **domain controllers** page, create a password, then click next.
 
-13. On the **DNS options**, **Paths**, **Review Options**, page, keep the settings default, and click next.
+13. Keep the settings on the **DNS options**, **Paths**, and **Review Options** page default, and click next.
 
 14. On the **Prerequisites Check** page, click **Install**. This will automatically restart the domain controller.
 
-15. Login to the domain controller as user. The username will be the domain name that was setup earlier, followed by a backslash and the username.
+15. Reconnect to the DC using the public IP address. When given the option to enter a username and password, click **More choices** from below and select **Use a different account**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/1d45eeea-fee3-4b16-8241-5bf39ef5d9fd)
+
+The username will be the domain name that was setup earlier, followed by a backslash and the username.
 
 ![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/2f20c08c-ee70-42d6-a3c6-9c99499e6f1f)
 
+<h2>Create additional users to log into Client VM</h2>
 
- 
+ 1. Once the DC has been logged into, go to the Server Manager Dashboard.
 
+ 2. At the top right, click **tools**, then select **Active Directory Users and Computers**.
 
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/a98ec1b5-73f7-4738-a60b-97a5899008b7)
 
+3. Create Organizational Units by right-clicking the domain name. Select **new**, then select **Organizational Units**.
 
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/2808b8be-8936-45a6-8c83-03b0470dad93)
+
+4. Use this process to create a file named **EMPLOYEES** and **ADMINS**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/30249a75-b47b-455a-a8c9-28ab1e8a4634)
+
+<h3>Create a User Within the Admins Folder</h3>
+
+1. Go to the ADMINS organizational unit, right-click within the blank window, select **new**, then click **user**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/0633edb8-4dc7-4dc5-b3d1-3e5bd0d06305)
+
+2. Input the user's name and username, click **next**, then create a password. 
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/06e805ab-4f8f-4a2f-ad1c-e2aead845829)
+
+3. Once the user has been created, assign domain admin credentials to the account.
+
+4. Right-click the Active Directory account that was created, then select **properties**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/96093f46-91d3-4625-9854-3b80230792f4)
+
+5. Click **Members Of** in the tabs, then click **add..**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/17f0af9d-cd5d-49ee-8b10-714ecd15dbfc)
+
+6. In the window under **Enter the object names to select**, enter "**domain admins**", then click **Check names**, then OK. Click Apply in the previous window, then click OK.
+
+7. Logoff of the Domain Controller.
+   
+<h2>Login to the DC as Admin</h2>
+
+1. Reconnect to the DC using the public IP address. When given the option to enter a username and password, click **More choices** from below and select **Use a different account**. Enter the name of the Admin account that was created. 
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/4307e4d5-e356-4899-bdef-43263654c0af)
+
+<h2>Join Client to Domain</h2>
+
+From the Azure Portal, the Client DNS settings will be changed to the DC's private IP address. 
+
+1. In the Azure Portal, enter **virtual machines** into the search, and select virtual machines.
+
+2. Click the DC name, then go to networking and copy the **NIC Private IP**
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/7f742227-a578-4225-9c97-4d154fc3a7f6)
+
+3. Go back to the Virtual Machines window in Azure, and click on the Client VM name. Click **Networking** and click the link next to **networking interface**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/cdf8b083-30cd-42d6-a535-7998800ba6b8)
+
+4. Under **Settings**, click **DNS Servers**, then select **custom** and input the DC's private IP address. 
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/908eecd0-6fcf-42d2-aa23-cc1fbf0761d7)
+
+5. Click **Save**, and wait for the client to update. 
+
+6. Go back to the Client portal in Azure, and click **restart**
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/3a3daad8-7986-4484-aaf6-ff04af86f8c2)
+
+7. Connect to the Client VM using the Client public IP address.
+
+8. Right-click the start menu, then click **sysetem**.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/443e72ab-aca9-49cc-9136-ec993ebec75b)
+
+9. Click **rename this PC** at the right of the window.
+
+[image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/1009d43b-41dc-4547-bac2-d56f2779507c)
+
+10. Click **Change**, select **Domain** under "**Member of**" and enter the domain name the click OK.
+
+![image](https://github.com/NathanSuguitan/configure-ad/assets/138082246/2d074370-782f-4976-a62e-a283fb3bb68d)
+
+11. 
 
 
 
